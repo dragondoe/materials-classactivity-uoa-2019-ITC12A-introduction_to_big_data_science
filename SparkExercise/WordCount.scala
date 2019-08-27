@@ -1,0 +1,5 @@
+// val textFile = sc.textFile("/usr/local/spark/README.md")
+val textFile = sc.textFile("./testTextData.txt")
+val wordCounts = textFile.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey((a, b) => a + b)
+    wordCounts.collect()
+    wordCounts.saveAsTextFile("./WordCountTest")
